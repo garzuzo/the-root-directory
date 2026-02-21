@@ -5,7 +5,6 @@ from . import Owner
 class File(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField(max_length=2000)
-    size = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(
