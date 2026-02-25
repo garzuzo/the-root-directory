@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra-head %}
+<link rel="stylesheet" href="{% static 'file_list.css'%}">
+{% endblock %}
+
+{% block content %}
+<h1>SOME ROOT FILES:</h1>
+<p>Learn something new today!</p>
+<div class="terminal container-fluid">
+    <ul>
+        {% for file in file_list %}
+        <li class="file">-rw-r--r-- {{ file.owner.nickname }} {{file.size}} {{ file.created_at|date:"M j Y" }}
+            <a class="title" href="{% url 'home' %}">{{ file.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="pagination">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="page-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

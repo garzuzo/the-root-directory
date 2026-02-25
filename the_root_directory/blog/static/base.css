@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "UbuntuMono";
+    src: url("fonts/UbuntuMono-Regular.ttf") format("truetype");
+}
+
+h1 {
+    color: #FAD500;
+}
+
+.navbar {
+    background-color: #FAD500;
+}
+
+.navbar a {
+    color: black;
+}
+
+.navbar a:hover {
+    background-color: black;
+    color: #FAD500;
+}
+
+body {
+    background-color: black;
+    font-family: "UbuntuMono", sans-serif;
+}
+
+.footer {
+    color: white;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    height: 2.5rem;
+    margin:0;
+}
