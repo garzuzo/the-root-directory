@@ -12,12 +12,13 @@ p {
     color: #FAD500;
 }
 
-.title {
+.title-link {
     color: #FAD500;
     font-family: 'UbuntuMono-Italic', sans-serif;
+    text-decoration: none;
 }
 
-.title:hover {
+.title-link:hover {
     color: #DF152B;
     text-decoration: none;
 }
@@ -25,4 +26,8 @@ p {
 .terminal {
     background-color: #212529;
     height: 50vh;
+}
+
+.pagination {
+    color: #FAD500;
 }

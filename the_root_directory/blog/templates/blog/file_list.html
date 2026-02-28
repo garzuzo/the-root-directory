@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block content %}
-<h1>SOME ROOT FILES:</h1>
+<h1 class="title">SOME ROOT FILES:</h1>
 <p>Learn something new today!</p>
 <div class="terminal container-fluid">
     <ul>
         {% for file in file_list %}
-        <li class="file">-rw-r--r-- {{ file.owner.nickname }} {{file.size}} {{ file.created_at|date:"M j Y" }}
-            <a class="title" href="{% url 'home' %}">{{ file.title }}</a>
+        <li class="file">-rw-r--r-- {{ file.owner.nickname }} {{file.size_in_kilobytes}} {{ file.created_at|date:"M j Y" }}
+            <a class="title-link" href="{{ file.get_absolute_url }}">{{ file.title }}</a>
         </li>
         {% endfor %}
     </ul>
