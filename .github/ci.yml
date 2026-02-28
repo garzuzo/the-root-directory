@@ -1,5 +1,10 @@
 name: Continuous Integration
-on: [ pull_request ]
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - 'develop'
+      - 'main'
 jobs:
   ci:
     name: python
