@@ -1,10 +1,11 @@
 from django.urls import path
-from . import views
-from blog.views import FilesView, FileDetailView
 
+from blog.views import FileDetailView, FilesView
+
+from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
     path("files/", FilesView.as_view(), name="files"),
-    path("file_detail/", FileDetailView.as_view())
+    path("files/<int:pk>/<slug:slug>/", FileDetailView.as_view(), name="file_detail"),
 ]

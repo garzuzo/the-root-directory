@@ -9,6 +9,20 @@ dependencies = [
     "coverage==7.13.4",
     "Django==6.0.2",
     "python-dotenv==1.2.1",
+    "markdown>=3.10.2",
 ]
 [tool.ruff]
 line-length = 100
+exclude = [
+    "**/migrations/**"
+]
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "N",
+    "B",
+    "DJ",
+]

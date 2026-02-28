@@ -1,7 +1,11 @@
 from django.contrib import admin
 
-from .models import Owner, File
-# Register your models here.
+from .models import File, Owner
+
+
+class FileAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+
 
 admin.site.register(Owner)
-admin.site.register(File)
+admin.site.register(File, FileAdmin)

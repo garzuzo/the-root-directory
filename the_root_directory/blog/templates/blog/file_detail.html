@@ -1,1 +1,16 @@
-<h1>detailed view</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra-head %}
+<link rel="stylesheet" href="{% static 'file_detail.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ file.title }}</h1>
+    <p>{{ file.owner.name }}</p>
+    <p>{{ file.owner.nickname }}</p>
+    <p>{{ file.created_at|date:"M j Y" }}</p>
+    <p>{{ markdown_content|safe }}</p>
+</div>
+{% endblock %}
