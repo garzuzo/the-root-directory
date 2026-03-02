@@ -1,21 +1,23 @@
 from django.db import models
-from . import Owner
+from django.urls import reverse
+
+from .owner import Owner
 
 
 class File(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=70)
     content = models.TextField(max_length=2000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(
-        Owner,
-        on_delete=models.CASCADE,
-        related_name='files'
-        )
-
-    @property
-    def size_in_kilobytes(self):
-        return len(self.content.encode('utf-8'))/1000
+    slug = models.SlugField(max_length=70, default="", null=False)
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name="files")
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("file_detail", kwargs={"pk": self.pk, "slug": self.slug})
+
+    @property
+    def size_in_kilobytes(self):
+        return len(self.content.encode("utf-8")) / 1000

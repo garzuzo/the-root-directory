@@ -5,28 +5,8 @@
     src: url("fonts/UbuntuMono-Italic.ttf") format("truetype");
 }
 
-.file {
-    color: #FAD500;
-    list-style-type: none;
-}
-
 p {
     color: #FAD500;
-}
-
-.title {
-    color: #FAD500;
-    font-family: 'UbuntuMono-Italic', sans-serif;
-}
-
-.title:hover {
-    color: #DF152B;
-    text-decoration: none;
-}
-
-.terminal {
-    background-color: #212529;
-    height: 80vh;
 }
 
 .cursor {

@@ -1,0 +1,14 @@
+.container {
+    background-color: #FFFDD0;
+}
+
+.file-title {
+    color: black;
+}
+
+pre {
+    background-color: #212529;
+    padding: 1rem;
+    border-radius: 5px;
+    color: #FAD500;
+}
