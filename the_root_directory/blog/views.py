@@ -1,8 +1,13 @@
 import markdown
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from django.db import transaction
+from django.shortcuts import redirect, render
+from django.views.generic import DetailView, ListView, View
 
-from .models import File
+from .forms import OwnerForm, UserForm
+from .models import File, Owner
 
 
 def home(request):
@@ -31,3 +36,40 @@ class FileDetailView(DetailView):
         md = markdown.Markdown(extensions=["fenced_code", "tables", "nl2br"])
         markdown_content = md.convert(content)
         return markdown_content
+
+
+class RegisterView(View):
+    template_name = "blog/register.html"
+
+    def get_forms(self, data):
+        user_form = UserForm(data.POST or None)
+        owner_form = OwnerForm(data.POST or None)
+        return {"user_form": user_form, "owner_form": owner_form}
+
+    def get(self, request):
+        return render(request, self.template_name, self.get_forms(request))
+
+    def post(self, request):
+        forms = self.get_forms(request)
+        if all(form.is_valid() for form in forms.values()):
+            with transaction.atomic():
+                user: User = forms["user_form"].save(commit=False)
+                user.password = make_password(user.password)
+                user.save()
+                owner: Owner = forms["owner_form"].save(commit=False)
+                owner.user = user
+                owner.save()
+                messages.success(request, "Owner created successfully!")
+            return redirect("welcome")
+        return render(request, self.template_name, forms)
+
+
+class LoginView(View):
+    template_name = "blog/login.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+def welcome(request):
+    return render(request, "blog/welcome.html")

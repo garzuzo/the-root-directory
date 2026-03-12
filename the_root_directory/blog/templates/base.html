@@ -25,11 +25,17 @@
                     <a class="nav-link" href="{% url 'files' %}">Files</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>
+                    <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
                 </li>
             </ul>
         </div>
     </nav>
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" zaria-label="Close"></button>
+        </div>
+    {% endfor %}
     <main class="flex-grow-1 min-vh-100">
         {% block content %}{% endblock %}
     </main>
